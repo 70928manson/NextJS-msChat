@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import ToasterContext from "./context/ToasterContext";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "NCKU Food Draw",
-  description: "國立成功大學的台南美食抽抽樂",
+  description: "成大的台南美食抽抽樂",
 };
 
 export default function RootLayout({
@@ -16,7 +17,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        <ToasterContext />
+        {children}
+      </body>
     </html>
   );
 }
