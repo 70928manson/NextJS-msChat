@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useCallback, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 
 import Button from '@/components/Button';
@@ -11,13 +11,17 @@ import { BsGithub, BsGoogle, BsInstagram } from 'react-icons/bs';
 import axios from 'axios';
 import toast from 'react-hot-toast';
 
-import { signIn } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
+import { useRouter } from 'next/navigation';
 
 type Variant = 'LOGIN' | 'REGISTER';
 
 const AuthForm = () => {
     const [variant, setVariant] = useState<Variant>("LOGIN");
     const [isLoading, setIsLoading] = useState(false);
+
+    const session = useSession();
+    const router = useRouter();
 
     // why useCallback => 記憶此function, 不會每一次重新render就變成新的函式
     const toggleVariant = useCallback(() => {
@@ -90,9 +94,14 @@ const AuthForm = () => {
             .finally(() => {
                 setIsLoading(false);
             });
-
-        // NextAuth Social SignIn
     };
+
+    useEffect(() => {
+        if (session?.status === "authenticated") {
+            console.log("Auth good !!!");
+            router.push("/users");
+        };
+    }, [session?.status]);
 
     return (
         <div className="mt-8 sm:mx-auto sm-w-full sm:max-w-md">
