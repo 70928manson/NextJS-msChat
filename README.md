@@ -1,5 +1,12 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
+```bash
+這是一個
+成功大學的
+美食抽抽樂app
+```
+
+
 ## Getting Started
 
 First, run the development server:
