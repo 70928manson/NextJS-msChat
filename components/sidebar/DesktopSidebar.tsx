@@ -1,12 +1,12 @@
 "use client";
 
 import { useState } from "react";
-import useRoute from "@/app/hooks/useRoute";
+import useRoutes from "@/app/hooks/useRoutes";
 import DesktopItem from "./DesktopItem";
 
 const DesktopSidebar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const routes = useRoute();
+  const routes = useRoutes();
 
   return (
     <div className="hidden lg:fixed lg:inset-y-0 lg:left-0 lg:z-40 lg:w-20 xl:px-6 lg:overflow-y-auto
@@ -26,7 +26,7 @@ const DesktopSidebar = () => {
               />
             ))
           }
-        </ul>
+         </ul>
       </nav>
     </div>
   );
