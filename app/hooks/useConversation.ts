@@ -16,12 +16,10 @@ const useConversation = () => {
         return !!conversationId
     }, [conversationId]);
 
-    return useMemo(() => {
-        return {
-            isOpen,
-            conversationId
-        };
-    }, [isOpen, conversationId]);
+    return useMemo(() => ({
+        isOpen,
+        conversationId
+    }), [isOpen, conversationId]);
 };
 
 export default useConversation;
