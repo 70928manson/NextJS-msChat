@@ -26,3 +26,5 @@ const getConversationById = async (
         return null;
     }
 };
+
+export default getConversationById;
