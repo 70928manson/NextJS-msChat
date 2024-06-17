@@ -23,7 +23,9 @@ export async function POST(
                 body: message,
                 image: image,
                 conversation: {
-                    connect: conversationId
+                    connect: {
+                        id: conversationId
+                    }
                 },
                 sender: {
                     connect: {
@@ -38,7 +40,7 @@ export async function POST(
             },
             include: {
                 seen: true,
-                sender: true
+                sender: true,
             }
         });
 
@@ -66,6 +68,7 @@ export async function POST(
 
         return NextResponse.json(newMessage);
     } catch (err: any) {
-        console.log("Error Message", err)
+        console.log("Error Message", err);
+        return new NextResponse('Internal Server Error', { status: 500 });
     }
 }
