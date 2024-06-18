@@ -6,9 +6,10 @@ export default withAuth({
     }
 });
 
-// 保護route
+// 保護route, 未登入情況下到matcher路徑會跳至"/"要求登入
 export const config = {
     matcher: [
-        "/users/:path*"
+        "/users/:path*",
+        "/conversations/:path*"
     ]
-}
+};
