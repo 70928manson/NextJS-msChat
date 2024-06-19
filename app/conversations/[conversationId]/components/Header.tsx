@@ -1,11 +1,12 @@
 "use client";
 
 import useOtherUser from "@/app/hooks/useOtherUser";
-import Avatar from "@/components/Avatar";
 import { Conversation, User } from "@prisma/client";
 import Link from "next/link";
 import { useMemo, useState } from "react";
 import { HiChevronLeft, HiEllipsisHorizontal } from "react-icons/hi2";
+import Avatar from "@/components/Avatar";
+
 import ProfileDrawer from "./ProfileDrawer";
 
 interface HeaderProps {
@@ -66,7 +67,7 @@ const Header: React.FC<HeaderProps> = ({
                 </div>
                 <HiEllipsisHorizontal
                     size={32}
-                    onClick={() => { }}
+                    onClick={() => setDrawerOpen(true) }
                     className="text-sky-500 cursor-pointer hover:text-sky-600 transition"
                 />
             </div>
