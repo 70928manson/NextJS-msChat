@@ -5,8 +5,9 @@ import Avatar from "@/components/Avatar";
 import { Dialog, DialogPanel, Transition, TransitionChild } from "@headlessui/react";
 import { Conversation, User } from "@prisma/client";
 import { format } from "date-fns";
-import { Fragment, useMemo } from "react";
+import { Fragment, useMemo, useState } from "react";
 import { IoClose, IoTrash } from "react-icons/io5";
+import Modal from "../../components/Modal";
 
 interface ProfileDrawerProps {
     isOpen: boolean;
@@ -22,6 +23,7 @@ const ProfileDrawer: React.FC<ProfileDrawerProps> = ({
     data
 }) => {
     const otherUser = useOtherUser(data);
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
     const joinedDate = useMemo(() => {
         return format(new Date(otherUser.createAt), 'PP');
@@ -41,6 +43,14 @@ const ProfileDrawer: React.FC<ProfileDrawerProps> = ({
 
     return (
         <>
+            <Modal
+                isOpen
+                onClose={() => setIsModalOpen(false)}
+            >
+                <div className="bg-white p-5">
+                    <p>Hello Modal</p>
+                </div>
+            </Modal>
             <Transition show={isOpen} as={Fragment}>
                 <Dialog as="div" className="relative z-50" onClose={onClose}>
                     <Transition
@@ -52,7 +62,7 @@ const ProfileDrawer: React.FC<ProfileDrawerProps> = ({
                         leaveFrom="opacity-100"
                         leaveTo="opacity-0"
                     >
-                        <div className="fixed inset-0 bg-black bg-opacity-40"/>
+                        <div className="fixed inset-0 bg-black bg-opacity-40" />
                     </Transition>
 
                     <div className="fixed inset-0 overflow-hidden">
@@ -87,18 +97,18 @@ const ProfileDrawer: React.FC<ProfileDrawerProps> = ({
                                             "
                                         >
                                             <div className="px-4 sm:px-6">
-                                                <div 
-                                                  className="flex items-start justify-end"
+                                                <div
+                                                    className="flex items-start justify-end"
                                                 >
                                                     <div className="ml-3 flex h-7 items-center">
-                                                        <button 
-                                                          onClick={onClose}
-                                                          type="button" 
-                                                          className="rounded-md bg-white text-gray-400 hover:text-gray-500
+                                                        <button
+                                                            onClick={onClose}
+                                                            type="button"
+                                                            className="rounded-md bg-white text-gray-400 hover:text-gray-500
                                                             focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2"
                                                         >
                                                             <span className="sr-only">Close panel</span>
-                                                            <IoClose size={24}/>
+                                                            <IoClose size={24} />
                                                         </button>
                                                     </div>
                                                 </div>
@@ -117,8 +127,8 @@ const ProfileDrawer: React.FC<ProfileDrawerProps> = ({
                                                     </div>
                                                     <div className="flex gap-10 my-8">
                                                         <div
-                                                          onClick={() => {}}
-                                                          className="flex flex-col gap-3 items-center cursor-pointer hover:opacity-75"
+                                                            onClick={() => { }}
+                                                            className="flex flex-col gap-3 items-center cursor-pointer hover:opacity-75"
                                                         >
                                                             <div className="w-10 h-10 bg-neutral-100 rounded-full flex items-center justify-center">
                                                                 <IoTrash size={20} />
@@ -133,12 +143,12 @@ const ProfileDrawer: React.FC<ProfileDrawerProps> = ({
                                                             {!data.isGroup && (
                                                                 <div>
                                                                     <dt
-                                                                      className="text-sm font-medium text-gray-500 sm:w-40 sm:flex-shrink-0"
+                                                                        className="text-sm font-medium text-gray-500 sm:w-40 sm:flex-shrink-0"
                                                                     >
                                                                         Email
                                                                     </dt>
                                                                     <dd
-                                                                      className="mt-1 text-sm text-gray-900 sm:col-span-2"
+                                                                        className="mt-1 text-sm text-gray-900 sm:col-span-2"
                                                                     >
                                                                         {otherUser.email}
                                                                     </dd>
@@ -146,24 +156,24 @@ const ProfileDrawer: React.FC<ProfileDrawerProps> = ({
                                                             )}
                                                             {!data.isGroup && (
                                                                 <>
-                                                                  <hr />
-                                                                  <div>
-                                                                    <dt className="text-sm font-medium text-gray-500 sm:w-40 sm:flex-shrink-0">
-                                                                        Joined
-                                                                    </dt>
-                                                                    <dd className="mt-1 text-sm text-gray-900 sm:col-span-2">
-                                                                        <time dateTime={joinedDate}>
-                                                                            {joinedDate}
-                                                                        </time>
-                                                                    </dd>
-                                                                  </div>
+                                                                    <hr />
+                                                                    <div>
+                                                                        <dt className="text-sm font-medium text-gray-500 sm:w-40 sm:flex-shrink-0">
+                                                                            Joined
+                                                                        </dt>
+                                                                        <dd className="mt-1 text-sm text-gray-900 sm:col-span-2">
+                                                                            <time dateTime={joinedDate}>
+                                                                                {joinedDate}
+                                                                            </time>
+                                                                        </dd>
+                                                                    </div>
                                                                 </>
                                                             )}
                                                         </dl>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>    
+                                        </div>
                                     </DialogPanel>
                                 </TransitionChild>
                             </div>
