@@ -5,7 +5,12 @@ import { useRouter } from "next/navigation";
 import useConversation from "@/app/hooks/useConversation";
 import axios from "axios";
 import toast from "react-hot-toast";
+
+import Button from "@/components/Button";
 import Modal from "../../components/Modal";
+
+import { FiAlertTriangle } from "react-icons/fi";
+import { DialogTitle } from "@headlessui/react";
 
 interface ConfirmModalProps {
     isOpen?: boolean;
@@ -40,7 +45,64 @@ const ConfirmModal: React.FC<ConfirmModalProps> = ({
           onClose={onClose}
         >
             <div className="sm:flex sm:items-start">
-                test
+                <div
+                  className="
+                    mx-auto
+                    flex
+                    h-12
+                    w-12
+                    flex-shrink-0
+                    items-center
+                    justify-center
+                    rounded-full
+                    bg-red-100
+                    sm:mx-0
+                    sm:h-10
+                    sm:w-10
+                  "
+                >
+                    <FiAlertTriangle 
+                      className="h-6 w-6 text-red-600"
+                    />
+                </div>
+                <div 
+                  className="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left"
+                >
+                    <DialogTitle
+                      as="h3"
+                      className="
+                        text-base
+                        font-semibold
+                        leading-6
+                        text-gray-900
+                      "
+                    >
+                        Delete conversation
+                    </DialogTitle>
+                    <div className="mt-2">
+                        <p className="text-sm text-gray-500">
+                            Are you sure tou want to delete this conversation? This action cannot be undone.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div 
+              className="mt-5 sm:mt-4 sm:flex sm:flex-row-reverse"
+            >
+                <Button
+                  disabled={isLoading}
+                  danger
+                  onClick={onDelete}
+                >
+                    Delete
+                </Button>
+                <Button
+                    disabled={isLoading}
+                    danger
+                    onClick={onClose}
+                >
+                    Cancel
+                </Button>
             </div>
         </Modal>
     );
